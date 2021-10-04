@@ -1,0 +1,64 @@
+<div class="row h-100">
+  <div class="col-2 bg-2">
+    <div class="row px-2 bg-0 align-items-center">
+      <div class="col">{{myId}}</div>
+      <div class="col-auto">
+        <button mat-icon-button>
+          <mat-icon class="material-icons-round">settings</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="row px-2 flex-column">
+      <button mat-flat-button class="col mt-2 d-flex" *ngFor="let user of userList"
+        (click)="selectTargetUser(user)">{{user}}</button>
+    </div>
+  </div>
+  <div class="col">
+    <div class="row flex-column h-100" *ngIf="ogre.targetUserId">
+      <ng-container *ngTemplateOutlet="selectedUserNavTemplate"></ng-container>
+      <ng-container *ngTemplateOutlet="messagesTemplate"></ng-container>
+      <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #selectedUserNavTemplate>
+  <div class="col-auto bg-3">
+    <div class="row align-items-center">
+      <div class="col-auto">
+        <mat-icon>alternate_email</mat-icon>
+      </div>
+      <div class="col">
+        {{ogre.targetUserId}}
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #messagesTemplate>
+  <div class="col h-100">
+    <div class="row h-100">
+      <div class="col" style="overflow: auto; height: calc(100vh - 8rem);">
+        <div class="mt-2" *ngFor="let message of messages">{{message}}</div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #inputTemplate>
+  <div class="col-auto">
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="fill" class="w-100">
+          <textarea matInput #messageBox [placeholder]="'Message ' + ogre.targetUserId" cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" (keydown.enter)="$event.preventDefault()"
+            (keyup.enter)="sendMessage(messageBox)"></textarea>
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- <button mat-flat-button color="primary" (click)="lightTheme()">Light</button>
+<button mat-flat-button color="accent" (click)="darkTheme()">Dark</button> -->
