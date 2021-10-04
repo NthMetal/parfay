@@ -8,10 +8,7 @@
         </button>
       </div>
     </div>
-    <div class="row px-2 flex-column">
-      <button mat-flat-button class="col mt-2 d-flex" *ngFor="let user of userList"
-        (click)="selectTargetUser(user)">{{user}}</button>
-    </div>
+    <ng-container *ngTemplateOutlet="usersTemplate"></ng-container>
   </div>
   <div class="col">
     <div class="row flex-column h-100" *ngIf="ogre.targetUserId">
@@ -21,6 +18,15 @@
     </div>
   </div>
 </div>
+
+<ng-template #usersTemplate>
+  <div class="row px-2 flex-column" style="overflow: auto;height: calc(100vh - 2.5rem); flex-wrap: nowrap;">
+    <button mat-flat-button class="mt-2 d-flex" *ngFor="let user of userList"
+      (click)="selectTargetUser(user)">{{user}}</button>
+    <button mat-flat-button class="mt-2 d-flex" color="primary" (click)="lightTheme()">Light</button>
+    <button mat-flat-button class="mt-2 d-flex" color="accent" (click)="darkTheme()">Dark</button>
+  </div>
+</ng-template>
 
 <ng-template #selectedUserNavTemplate>
   <div class="col-auto bg-3">

@@ -19,41 +19,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.ogre = new Ogre();
     this.myId = this.ogre.user.id;
-    // const documentElements = {
-    //   sendMessageInput: document.querySelector('#sendMessageInput') as any,
-    //   sendMessageButton: document.querySelector('#sendMessageButton') as any,
-    //   messagesInfo: document.querySelector('#messagesInfo') as any,
-    //   peerList: document.querySelector('#peerList') as any,
-    //   userInfo: document.querySelector('#userInfo') as any,
-    // }
-
-    // const documentActions = {
-    //   addNewMessage: (newMessage: string | number) => {
-    //     const oldTextContext = documentElements.messagesInfo.textContent;
-    //     documentElements.messagesInfo.textContent = oldTextContext + newMessage + '\n';
-    //   },
-    //   updatePeerList: (updatedList: any[]) => {
-    //     const buttonHTML = (buttonId: any) => `<button id="${buttonId}">${buttonId}</button>`
-    //     console.log('updating peer list with ', updatedList);
-    //     documentElements.peerList.innerHTML = updatedList.map((peer: any) => buttonHTML(peer)).join('\n');
-    //     updatedList.forEach((button: string) => {
-    //       document.querySelector(`#${button}`)!.addEventListener('click', event => {
-    //         ogre.selectTargetPeer(button);
-    //       });
-    //     });
-    //   },
-    //   updateUser: (userId: any) => {
-    //     documentElements.userInfo.textContent = `Connected as: ${userId}`
-    //   }
-    // }
-
-    // documentElements.sendMessageButton.addEventListener('click', (event: any) => {
-    //   console.log('sending...', documentElements.sendMessageInput.value)
-    //   const message = `${new Date()}: ${documentElements.sendMessageInput.value}`;
-    //   ogre.sendMessage(message);
-    // });
-
-    // documentActions.updateUser(ogre.user.id);
 
     this.ogre.messages.subscribe((message: any) => {
       return this.messages.push(message);
