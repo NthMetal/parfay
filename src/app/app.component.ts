@@ -11,8 +11,8 @@ import { IBaseMessage } from 'ogre-router/dist/tsc/models/ogre';
 export class AppComponent implements OnInit {
 
   ogre: Ogre;
-  userList: string[] = [];
-  myId = '';
+  userList: { id: string; alias: string; }[] = [];
+  myUser: User;
   recievedMessages: {
     [userId: string]: IBaseMessage[]
   } = {}
@@ -20,9 +20,10 @@ export class AppComponent implements OnInit {
 
   constructor(private renderer: Renderer2) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.ogre = new Ogre();
-    this.myId = this.ogre.user.id;
+    await this.ogre.gotUser();
+    this.myUser = this.ogre.user;
 
     this.ogre.messages.subscribe((message: IBaseMessage) => {
       if (this.recievedMessages[message.source]) {
@@ -37,11 +38,11 @@ export class AppComponent implements OnInit {
     });
   }
 
-  selectTargetUser(user: string) {
-    if (this.recievedMessages[user]) {
-      this.displayedMessages = this.recievedMessages[user];
+  selectTargetUser(user: { id: string, alias: string}) {
+    if (this.recievedMessages[user.id]) {
+      this.displayedMessages = this.recievedMessages[user.id];
     } else {
-      this.recievedMessages[user] = [];
+      this.recievedMessages[user.id] = [];
       this.displayedMessages = [];
     }
     this.ogre.selectTargetPeer(user);

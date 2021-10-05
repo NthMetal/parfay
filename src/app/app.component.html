@@ -1,7 +1,7 @@
 <div class="row h-100">
   <div class="col-2 bg-2">
     <div class="row px-2 bg-0 align-items-center">
-      <div class="col">{{myId}}</div>
+      <div class="col">{{myUser?.alias}}</div>
       <div class="col-auto">
         <button mat-icon-button>
           <mat-icon class="material-icons-round">settings</mat-icon>
@@ -11,7 +11,7 @@
     <ng-container *ngTemplateOutlet="usersTemplate"></ng-container>
   </div>
   <div class="col">
-    <div class="row flex-column h-100" *ngIf="ogre.targetUserId">
+    <div class="row flex-column h-100" *ngIf="ogre.targetUser">
       <ng-container *ngTemplateOutlet="selectedUserNavTemplate"></ng-container>
       <ng-container *ngTemplateOutlet="displayedMessagesTemplate"></ng-container>
       <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
@@ -22,7 +22,7 @@
 <ng-template #usersTemplate>
   <div class="row ps-2 pe-3 pt-2 flex-column" style="overflow: auto;height: calc(100vh - 3rem); flex-wrap: nowrap;">
     <button mat-flat-button class="mt-2 d-flex" *ngFor="let user of userList"
-      (click)="selectTargetUser(user)" [matBadge]="recievedMessages[user] && recievedMessages[user].length ? recievedMessages[user].length : null" matBadgeColor="warn">{{user}}</button>
+      (click)="selectTargetUser(user)" [matBadge]="recievedMessages[user.id] && recievedMessages[user.id].length ? recievedMessages[user.id].length : null" matBadgeColor="warn">{{user.alias}}</button>
     <button mat-flat-button class="mt-2 d-flex" color="primary" (click)="lightTheme()">Light</button>
     <button mat-flat-button class="mt-2 d-flex" color="accent" (click)="darkTheme()">Dark</button>
   </div>
@@ -35,7 +35,7 @@
         <mat-icon>alternate_email</mat-icon>
       </div>
       <div class="col">
-        {{ogre.targetUserId}}
+        {{ogre.targetUser?.alias}}
       </div>
     </div>
   </div>
@@ -55,7 +55,7 @@
 
 <ng-template #displayedMessageTemplate let-displayedMessage>
   <div class="row">
-    <div class="col-auto"><b>{{displayedMessage?.source}}</b></div>
+    <div class="col-auto"><b>{{displayedMessage?.sourceAlias}}</b></div>
     <div class="col"><sup><i>{{displayedMessage?.date | date: 'MMM/d/yy'}}</i></sup></div>
   </div>
   <div class="row">
@@ -70,7 +70,7 @@
     <div class="row">
       <div class="col">
         <mat-form-field appearance="fill" class="w-100">
-          <textarea matInput #messageBox [placeholder]="'Message ' + ogre.targetUserId" cdkTextareaAutosize
+          <textarea matInput #messageBox [placeholder]="'Message ' + ogre.targetUser?.alias" cdkTextareaAutosize
             #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" (keydown.enter)="$event.preventDefault()"
             (keyup.enter)="sendMessage(messageBox)"></textarea>
           <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
