@@ -13,16 +13,16 @@
   <div class="col">
     <div class="row flex-column h-100" *ngIf="ogre.targetUserId">
       <ng-container *ngTemplateOutlet="selectedUserNavTemplate"></ng-container>
-      <ng-container *ngTemplateOutlet="messagesTemplate"></ng-container>
+      <ng-container *ngTemplateOutlet="displayedMessagesTemplate"></ng-container>
       <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
     </div>
   </div>
 </div>
 
 <ng-template #usersTemplate>
-  <div class="row px-2 flex-column" style="overflow: auto;height: calc(100vh - 2.5rem); flex-wrap: nowrap;">
+  <div class="row ps-2 pe-3 pt-2 flex-column" style="overflow: auto;height: calc(100vh - 3rem); flex-wrap: nowrap;">
     <button mat-flat-button class="mt-2 d-flex" *ngFor="let user of userList"
-      (click)="selectTargetUser(user)">{{user}}</button>
+      (click)="selectTargetUser(user)" [matBadge]="recievedMessages[user] && recievedMessages[user].length ? recievedMessages[user].length : null" matBadgeColor="warn">{{user}}</button>
     <button mat-flat-button class="mt-2 d-flex" color="primary" (click)="lightTheme()">Light</button>
     <button mat-flat-button class="mt-2 d-flex" color="accent" (click)="darkTheme()">Dark</button>
   </div>
@@ -30,8 +30,8 @@
 
 <ng-template #selectedUserNavTemplate>
   <div class="col-auto bg-3">
-    <div class="row align-items-center">
-      <div class="col-auto">
+    <div class="row align-items-center mt-1">
+      <div class="col-auto my-1">
         <mat-icon>alternate_email</mat-icon>
       </div>
       <div class="col">
@@ -41,12 +41,26 @@
   </div>
 </ng-template>
 
-<ng-template #messagesTemplate>
+<ng-template #displayedMessagesTemplate>
   <div class="col h-100">
     <div class="row h-100">
-      <div class="col" style="overflow: auto; height: calc(100vh - 8rem);">
-        <div class="mt-2" *ngFor="let message of messages">{{message}}</div>
+      <div class="col g-0" style="overflow-y: auto; overflow-x: hidden; height: calc(100vh - 8rem);">
+        <div class="py-2 px-3 hover-highlight" *ngFor="let displayedMessage of displayedMessages">
+          <ng-container *ngTemplateOutlet="displayedMessageTemplate; context: { $implicit: displayedMessage }"></ng-container>
+        </div>
       </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #displayedMessageTemplate let-displayedMessage>
+  <div class="row">
+    <div class="col-auto"><b>{{displayedMessage?.source}}</b></div>
+    <div class="col"><sup><i>{{displayedMessage?.date | date: 'MMM/d/yy'}}</i></sup></div>
+  </div>
+  <div class="row">
+    <div class="col">
+      {{displayedMessage?.message}}
     </div>
   </div>
 </ng-template>

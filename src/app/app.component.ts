@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Ogre, User } from 'ogre-router';
+import { IBaseMessage } from 'ogre-router/dist/tsc/models/ogre';
 
 
 @Component({
@@ -12,7 +13,10 @@ export class AppComponent implements OnInit {
   ogre: Ogre;
   userList: string[] = [];
   myId = '';
-  messages: string[] = [];
+  recievedMessages: {
+    [userId: string]: IBaseMessage[]
+  } = {}
+  displayedMessages: IBaseMessage[] = [];
 
   constructor(private renderer: Renderer2) {}
 
@@ -20,8 +24,12 @@ export class AppComponent implements OnInit {
     this.ogre = new Ogre();
     this.myId = this.ogre.user.id;
 
-    this.ogre.messages.subscribe((message: any) => {
-      return this.messages.push(message);
+    this.ogre.messages.subscribe((message: IBaseMessage) => {
+      if (this.recievedMessages[message.source]) {
+        this.recievedMessages[message.source].push(message);
+      } else {
+        this.recievedMessages[message.source] = [message];
+      }
     });
 
     this.ogre.observePeerList().subscribe(list => {
@@ -30,12 +38,17 @@ export class AppComponent implements OnInit {
   }
 
   selectTargetUser(user: string) {
+    if (this.recievedMessages[user]) {
+      this.displayedMessages = this.recievedMessages[user];
+    } else {
+      this.recievedMessages[user] = [];
+      this.displayedMessages = [];
+    }
     this.ogre.selectTargetPeer(user);
   }
 
   sendMessage(messageBox: HTMLTextAreaElement) {
-    const message = `${new Date()}: ${messageBox.value}`;
-    this.ogre.sendMessage(message);
+    this.ogre.sendMessage(messageBox.value);
     messageBox.value = '';
   }
 
