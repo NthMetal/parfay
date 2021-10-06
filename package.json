@@ -35,7 +35,7 @@
     "@angular-devkit/build-angular": "~12.2.8",
     "@angular/cli": "~12.1.1",
     "@angular/compiler-cli": "~12.1.1",
-    "@types/jasmine": "~3.6.0",
+    "@types/jasmine": "~3.9.1",
     "@types/node": "^12.11.1",
     "@types/simple-peer": "^9.11.3",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
