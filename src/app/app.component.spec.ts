@@ -20,16 +20,27 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'parfay'`, () => {
+  it(`should have initialized variables'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('parfay');
+    expect(app.ogre).toBeFalsy()
+    expect(app.userList).toBeTruthy();
+    expect(app.myUser).toBeFalsy();
+    expect(app.recievedMessages).toBeTruthy();
+    expect(app.displayedMessages).toBeTruthy();
   });
 
-  it('should render title', () => {
+  it(`should have initialize ogre on ngOnInit'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('parfay app is running!');
+    const app = fixture.componentInstance;
+    app.ngOnInit();
+    expect(app.ogre).toBeTruthy();
   });
+
+  // it('should render title', () => {
+  //   const fixture = TestBed.createComponent(AppComponent);
+  //   fixture.detectChanges();
+  //   const compiled = fixture.nativeElement;
+  //   expect(compiled.querySelector('.content span').textContent).toContain('parfay app is running!');
+  // });
 });

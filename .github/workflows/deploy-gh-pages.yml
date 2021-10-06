@@ -25,19 +25,3 @@ jobs:
         base_href: /parfay/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
         deploy_branch: gh-pages # The branch the action should deploy to.
         angular_dist_build_folder: dist/parfay # The folder where your project is supposed to be after running ng build by the action.
-
-    # steps:
-    # - uses: actions/checkout@v2
-    # - uses: actions/setup-node@v2
-    #   with:
-    #     node-version: '12'
-    # - run: npm install
-    # - run: npm run build:prod
-
-    # - run: touch docs/.nojekyll
-    # - name: Deploy App 🚀
-    #   uses: JamesIves/github-pages-deploy-action@releases/v3
-    #   with:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #     BRANCH: gh-pages # The branch the action should deploy to.
-    #     FOLDER: docs # The folder the action should deploy.
