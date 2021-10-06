@@ -57,9 +57,9 @@
 </ng-template>
 
 <ng-template #displayedMessageTemplate let-displayedMessage>
-  <div class="row">
-    <div class="col-auto"><b>{{displayedMessage?.sourceAlias}}</b></div>
-    <div class="col"><sup><i>{{displayedMessage?.date | date: 'MMM/d/yy'}}</i></sup></div>
+  <div class="g-2 mb-1 row align-items-end">
+    <div class="col-auto"><span style="font-weight: 500;">{{displayedMessage?.sourceAlias}}</span></div>
+    <div class="col"><sub matTooltip="{{ displayedMessage?.date | date: 'EEEE, MMMM d, y h:mm:ss a'}}"><i>{{displayedMessage?.date | date: 'MMM d, y'}}</i></sub></div>
   </div>
   <div class="row">
     <div class="col">

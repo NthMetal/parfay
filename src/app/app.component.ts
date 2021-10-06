@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Ogre, User } from 'ogre-router';
 import { IBaseMessage } from 'ogre-router/dist/tsc/models/ogre';
 
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 
   constructor(private renderer: Renderer2) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.ogre = new Ogre();
     await this.ogre.gotUser();
     this.myUser = this.ogre.user;
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  selectTargetUser(user: { id: string, alias: string}) {
+  selectTargetUser(user: { id: string, alias: string}): void {
     if (this.recievedMessages[user.id]) {
       this.displayedMessages = this.recievedMessages[user.id];
     } else {
@@ -48,17 +48,17 @@ export class AppComponent implements OnInit {
     this.ogre.selectTargetPeer(user);
   }
 
-  sendMessage(messageBox: HTMLTextAreaElement) {
+  sendMessage(messageBox: HTMLTextAreaElement): void {
     this.ogre.sendMessage(messageBox.value);
     messageBox.value = '';
   }
 
-  lightTheme() {
+  lightTheme(): void {
     this.renderer.addClass(document.body, 'parfay-light-theme');
     this.renderer.removeClass(document.body, 'parfay-dark-theme');
   }
 
-  darkTheme() {
+  darkTheme(): void {
     this.renderer.addClass(document.body, 'parfay-dark-theme');
     this.renderer.removeClass(document.body, 'parfay-light-theme');
   }
