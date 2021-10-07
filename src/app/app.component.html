@@ -1,87 +1,32 @@
-<div class="row h-100">
-  <div class="col-2 bg-2">
-    <div class="row px-2 bg-0 align-items-center">
-      <div class="align-items-center col d-flex justify-content-between">
-        {{myUser?.alias}}
+<div class="row">
+  <div class="col-2 vh-100">
+    <div class="row h-100 flex-column">
+      <div class="col-auto bg-0">
+        <div class="row px-2 bg-0 align-items-center">
+          <div class="align-items-center col d-flex justify-content-between">
+            {{myUser?.alias}}
+          </div>
+          <div class="col-auto">
+            <button mat-icon-button routerLink="settings">
+              <mat-icon class="material-icons-round">settings</mat-icon>
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="col-auto">
-        <button mat-icon-button>
-          <mat-icon class="material-icons-round">settings</mat-icon>
-        </button>
+      <div class="col bg-2" style="overflow: auto">
+        <ng-container *ngTemplateOutlet="usersTemplate"></ng-container>
       </div>
     </div>
-    <ng-container *ngTemplateOutlet="usersTemplate"></ng-container>
   </div>
   <div class="col">
-    <div class="row flex-column h-100" *ngIf="ogre.targetUser">
-      <ng-container *ngTemplateOutlet="selectedUserNavTemplate"></ng-container>
-      <ng-container *ngTemplateOutlet="displayedMessagesTemplate"></ng-container>
-      <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>
 
 <ng-template #usersTemplate>
-  <div class="row ps-2 pe-3 pt-2 flex-column" style="overflow: auto;height: calc(100vh - 3rem); flex-wrap: nowrap;">
-    <button mat-flat-button class="mt-2 d-flex" *ngFor="let user of userList"
-      (click)="selectTargetUser(user)" [matBadge]="recievedMessages[user.id] && recievedMessages[user.id].length ? recievedMessages[user.id].length : null" matBadgeColor="warn">{{user.alias}}</button>
-    <button mat-flat-button class="mt-2 d-flex" color="primary" (click)="lightTheme()">Light</button>
-    <button mat-flat-button class="mt-2 d-flex" color="accent" (click)="darkTheme()">Dark</button>
+  <div class="p-1">
+    <button mat-flat-button class="mt-2 d-flex w-100" *ngFor="let user of userList" (click)="selectTargetUser(user)"
+      routerLink="/chat/private">{{user.alias}}</button>
+    <!-- [matBadge]="recievedMessages[user.id] && recievedMessages[user.id].length ? recievedMessages[user.id].length : null" matBadgeColor="warn" -->
   </div>
 </ng-template>
-
-<ng-template #selectedUserNavTemplate>
-  <div class="col-auto bg-3">
-    <div class="row align-items-center mt-1">
-      <div class="col-auto my-1">
-        <img style="filter: invert(1) contrast(0.5); mix-blend-mode: difference;" src="assets/logo/parfay.svg" width="20px"/>
-        <!-- <mat-icon>alternate_email</mat-icon> -->
-      </div>
-      <div class="col">
-        {{ogre.targetUser?.alias}}
-      </div>
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #displayedMessagesTemplate>
-  <div class="col h-100">
-    <div class="row h-100">
-      <div class="col g-0" style="overflow-y: auto; overflow-x: hidden; height: calc(100vh - 8rem);">
-        <div class="py-2 px-3 hover-highlight" *ngFor="let displayedMessage of displayedMessages">
-          <ng-container *ngTemplateOutlet="displayedMessageTemplate; context: { $implicit: displayedMessage }"></ng-container>
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #displayedMessageTemplate let-displayedMessage>
-  <div class="g-2 mb-1 row align-items-end">
-    <div class="col-auto"><span style="font-weight: 500;">{{displayedMessage?.sourceAlias}}</span></div>
-    <div class="col"><sub matTooltip="{{ displayedMessage?.date | date: 'EEEE, MMMM d, y h:mm:ss a'}}"><i>{{displayedMessage?.date | date: 'MMM d, y'}}</i></sub></div>
-  </div>
-  <div class="row">
-    <div class="col">
-      {{displayedMessage?.message}}
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #inputTemplate>
-  <div class="col-auto">
-    <div class="row">
-      <div class="col">
-        <mat-form-field appearance="fill" class="w-100">
-          <textarea matInput #messageBox [placeholder]="'Message ' + ogre.targetUser?.alias" cdkTextareaAutosize
-            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" (keydown.enter)="$event.preventDefault()"
-            (keyup.enter)="sendMessage(messageBox)"></textarea>
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        </mat-form-field>
-      </div>
-    </div>
-  </div>
-</ng-template>
-
-<!-- <button mat-flat-button color="primary" (click)="lightTheme()">Light</button>
-<button mat-flat-button color="accent" (click)="darkTheme()">Dark</button> -->
