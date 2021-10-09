@@ -15,7 +15,9 @@ export class OgreService {
   private _onTargetUserUpdated: BehaviorSubject<{ id: string; alias: string;} | undefined> = new BehaviorSubject<{ id: string; alias: string;} | undefined>(undefined);
 
   constructor(private messageService: MessageService) {
-    this.ogre = new Ogre();
+    this.ogre = new Ogre({
+      signalingAddress: 'wss://parfay-example-server.herokuapp.com'
+    });
     const subscription = this.ogre.onUserLoaded().subscribe(user => {
       if (user) {
         this.ogre.observeMessages().subscribe((message: IBaseMessage) => {
