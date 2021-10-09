@@ -2,6 +2,7 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Ogre, User } from 'ogre-router';
 import { IBaseMessage } from 'ogre-router/dist/tsc/models/ogre';
 import { OgreService } from './shared/services/ogre.service';
+import { SettingsService } from './shared/services/settings.service';
 
 
 @Component({
@@ -15,7 +16,10 @@ export class AppComponent implements OnInit {
   userList: { id: string; alias: string; }[] = [];
   myUser: User;
 
-  constructor(private ogreService: OgreService) {}
+  constructor(
+    private ogreService: OgreService,
+    private settingsService: SettingsService
+  ) {}
 
   async ngOnInit(): Promise<void> {
 

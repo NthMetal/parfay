@@ -9,7 +9,7 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
-$parfay-dark-primary: mat.define-palette(mat.$brown-palette, 900);
+$parfay-dark-primary: mat.define-palette(mat.$green-palette, 700);
 $parfay-dark-accent: mat.define-palette(mat.$blue-gray-palette, 700);
 
 // The warn palette is optional (defaults to red).

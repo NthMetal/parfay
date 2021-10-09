@@ -18,7 +18,7 @@ export class OgreService {
     this.ogre = new Ogre();
     const subscription = this.ogre.onUserLoaded().subscribe(user => {
       if (user) {
-        this.ogre.messages.subscribe((message: IBaseMessage) => {
+        this.ogre.observeMessages().subscribe((message: IBaseMessage) => {
           this.messageService.nextMessage(message);
         });
     

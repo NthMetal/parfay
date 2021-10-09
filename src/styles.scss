@@ -1,7 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+/* Tag Styles */
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+i {  color:#72767d }
+
+/** Material Theme Styles **/
+
+
 @mixin material-overrides {
     .mat-form-field-infix { border: none }
     .mat-input-element { caret-color: auto;  }
@@ -10,6 +15,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         z-index: 1;
     }
 }
+
 .parfay-light-theme {
     @import './parfay-light-theme.scss';
     @include material-overrides;
@@ -31,6 +37,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .bg-3 { background: #424242 }
 }
 
+/** Additional Helper Classes **/
+
 .w-100 {
     width: 100%;
 }
@@ -50,6 +58,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .hover-highlight:hover {
     background: rgba(0,0,0,0.1);
 }
+
+/** Scrollbar Styles **/
 
 ::-webkit-scrollbar {
     width: 10px;
