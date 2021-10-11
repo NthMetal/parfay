@@ -7,7 +7,7 @@
             {{myUser?.alias}}
           </div>
           <div class="col-auto">
-            <button mat-icon-button routerLink="settings">
+            <button mat-icon-button (click)="selectSettings()">
               <mat-icon class="material-icons-round">settings</mat-icon>
             </button>
           </div>
@@ -26,7 +26,9 @@
 <ng-template #usersTemplate>
   <div class="p-1">
     <button mat-flat-button class="mt-2 d-flex w-100" *ngFor="let user of userList" (click)="selectTargetUser(user)"
-      routerLink="/chat/private">{{user.alias}}</button>
+      routerLink="/chat/private"
+      [matBadge]="unreadMessages[user.id] || null" matBadgeColor="warn"
+      >{{user.alias}}</button>
     <!-- [matBadge]="recievedMessages[user.id] && recievedMessages[user.id].length ? recievedMessages[user.id].length : null" matBadgeColor="warn" -->
   </div>
 </ng-template>

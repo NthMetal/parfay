@@ -16,6 +16,7 @@ export class OgreService {
 
   constructor(private messageService: MessageService) {
     this.ogre = new Ogre({
+      // signalingAddress: 'ws://localhost:3000'
       signalingAddress: 'wss://parfay-example-server.herokuapp.com'
     });
     const subscription = this.ogre.onUserLoaded().subscribe(user => {
@@ -25,7 +26,7 @@ export class OgreService {
         });
     
         this.ogre.observePeerList().subscribe(list => {
-          this._onPeerlistUpdated.next(list);
+          this._onPeerlistUpdated.next(list.filter(_user => _user.id !== user.id));
         });
         
         subscription.unsubscribe();
@@ -55,6 +56,7 @@ export class OgreService {
   }
 
   sendMessage(message: string): void {
+    console.log('sending message', message);
     this.ogre.sendMessage(message);
   }
 

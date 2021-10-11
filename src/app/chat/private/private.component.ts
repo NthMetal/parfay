@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IBaseMessage } from 'ogre-router/dist/tsc/models/ogre';
 import { Subscription } from 'rxjs';
 import { MessageService } from 'src/app/shared/services/message.service';
@@ -10,6 +10,7 @@ import { OgreService } from 'src/app/shared/services/ogre.service';
   styleUrls: ['./private.component.less']
 })
 export class PrivateComponent implements OnInit {
+  @ViewChild('messageBoxElement') messageBoxElement: ElementRef<any>;
 
   targetUser: { id: string; alias: string; } | undefined = undefined;
   displayedMessages: IBaseMessage[] = [];
@@ -29,14 +30,32 @@ export class PrivateComponent implements OnInit {
         if (this.messagesSubscription) this.messagesSubscription.unsubscribe();
         this.messagesSubscription = this.messageService.onMessageById(this.targetUser.id).subscribe(message => {
           this.displayedMessages.push(message);
+          this.scrollMessageBoxDown();
         });
       }
     });
   }
 
-  sendMessage(messageBox: HTMLTextAreaElement): void {
+  async sendMessage(messageBox: HTMLTextAreaElement): Promise<void> {
+    const me = await this.ogreService.getUser();
+    const thisMessage: IBaseMessage = {
+      bare: true,
+      message: messageBox.value,
+      source: me.id,
+      sourceAlias: me.alias,
+      target: me.id,
+      date: new Date()
+    }
+    this.displayedMessages.push(thisMessage);
+    this.scrollMessageBoxDown();
     this.ogreService.sendMessage(messageBox.value);
     messageBox.value = '';
+  }
+
+  scrollMessageBoxDown() {
+    setTimeout(() => {
+      this.messageBoxElement.nativeElement.scrollTop = this.messageBoxElement.nativeElement.scrollHeight;
+    });
   }
 
 }
