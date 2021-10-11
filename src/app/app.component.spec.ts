@@ -26,16 +26,14 @@ describe('AppComponent', () => {
     expect(app.ogre).toBeFalsy()
     expect(app.userList).toBeTruthy();
     expect(app.myUser).toBeFalsy();
-    expect(app.recievedMessages).toBeTruthy();
-    expect(app.displayedMessages).toBeTruthy();
   });
 
-  it(`should have initialize ogre on ngOnInit'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    app.ngOnInit();
-    expect(app.ogre).toBeTruthy();
-  });
+  // it(`should have initialize ogre on ngOnInit'`, () => {
+  //   const fixture = TestBed.createComponent(AppComponent);
+  //   const app = fixture.componentInstance;
+  //   app.ngOnInit();
+  //   expect(app.ogre).toBeTruthy();
+  // });
 
   // it('should render title', () => {
   //   const fixture = TestBed.createComponent(AppComponent);

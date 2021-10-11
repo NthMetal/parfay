@@ -37,17 +37,17 @@ export class SettingsComponent implements OnInit {
     this.myUserNumber = splitUserId[1];
   }
 
-  themeRadioButtonChanged(event: MatSelectionListChange) {
+  themeRadioButtonChanged(event: MatSelectionListChange): void {
     if (event.options[0].value === 'light') this.lightTheme();
     if (event.options[0].value === 'dark') this.darkTheme();
   }
 
-  saveProfileSettings() {
+  saveProfileSettings(): void {
     this.saveProfileName();
 
   }
 
-  private async saveProfileName() {
+  private async saveProfileName(): Promise<void> {
     if (this.myUserName === this.oldUserName) return;
     const newUser = await this.ogreService.ogre.updateAlias(this.myUserName);
     console.log(newUser);

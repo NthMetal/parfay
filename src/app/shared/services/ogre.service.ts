@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Ogre, User } from 'ogre-router';
 import { IBaseMessage } from 'ogre-router/dist/tsc/models/ogre';
 import { BehaviorSubject, Subject } from 'rxjs';

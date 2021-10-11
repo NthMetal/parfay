@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ogre, User } from 'ogre-router';
 import { MessageService } from './shared/services/message.service';
@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
     this.ogreService.selectTargetPeer(user);
   }
 
-  selectSettings() {
+  selectSettings(): void {
     this.router.navigateByUrl('/settings');
     this.targetUserId = '';
   }

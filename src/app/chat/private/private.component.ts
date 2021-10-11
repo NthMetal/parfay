@@ -52,7 +52,7 @@ export class PrivateComponent implements OnInit {
     messageBox.value = '';
   }
 
-  scrollMessageBoxDown() {
+  scrollMessageBoxDown(): void {
     setTimeout(() => {
       this.messageBoxElement.nativeElement.scrollTop = this.messageBoxElement.nativeElement.scrollHeight;
     });
