@@ -14,6 +14,9 @@ i {  color:#72767d }
     .mat-badge-content {
         z-index: 1;
     }
+    .mat-button-base:hover {
+        filter: brightness(85%);
+    }
 }
 
 .parfay-light-theme {
@@ -30,7 +33,7 @@ i {  color:#72767d }
     @import './parfay-dark-theme.scss';
     @include material-overrides;
     background: #212121;
-    color: white;
+    color: #e0e0e0;
     .bg-0 { background: #000000 }
     .bg-1 { background: #212121 }
     .bg-2 { background: #303030 }
