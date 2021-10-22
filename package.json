@@ -39,7 +39,7 @@
     "@types/node": "^16.10.3",
     "@types/simple-peer": "^9.11.3",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
+    "@typescript-eslint/parser": "^5.1.0",
     "eslint": "^7.32.0",
     "jasmine-core": "~3.10.0",
     "karma": "~6.3.0",
