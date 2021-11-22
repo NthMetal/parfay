@@ -34,7 +34,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.8",
     "@angular/cli": "~12.2.8",
-    "@angular/compiler-cli": "~12.2.11",
+    "@angular/compiler-cli": "~13.0.2",
     "@types/jasmine": "~3.10.1",
     "@types/node": "^16.10.3",
     "@types/simple-peer": "^9.11.3",
