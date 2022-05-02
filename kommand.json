@@ -1,0 +1,11 @@
+{
+    "components": {
+        "parfay": {
+            "type": "@angularapp.spa",
+            "bundler": "webpack"
+        }
+    },
+    "repos": {
+        "angularapp": "https://github.com/cloudkommand/angularapp"
+    }
+}

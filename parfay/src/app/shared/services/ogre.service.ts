@@ -16,8 +16,8 @@ export class OgreService {
 
   constructor(private messageService: MessageService) {
     this.ogre = new Ogre({
-      // signalingAddress: 'ws://localhost:3000'
-      signalingAddress: 'wss://parfay-example-server.herokuapp.com'
+      signalingAddress: 'ws://localhost:3000'
+      // signalingAddress: 'wss://parfay-example-server.herokuapp.com'
     });
     const subscription = this.ogre.onUserLoaded().subscribe(user => {
       if (user) {
